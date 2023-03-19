@@ -12,7 +12,8 @@ include 'header.php';
             <ul class="doc-list">
                 <li><a href="https://drive.google.com/file/d/11gykToy7wZfZLGkJNWBMtiWrUG-AXkvC/view?usp=sharing"
                         target="_blank">Planning Document</a></li>
-                <li>test</li>
+                <li><a href="https://drive.google.com/open?id=1DlQSnrOdbiFzdChjyZAbcSRM4G-92OM1&authuser=black491%40gmail.com&usp=drive_fs"
+                        target="_blank">System Analysis Document</a></li>
                 <li>test</li>
                 <li>test</li>
                 <li>test</li>
