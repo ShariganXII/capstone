@@ -25,7 +25,16 @@ include 'db\db.php';
                 <div class="nav-links">
                     <ul>
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="maps.php">Map</a></li>
+                        <li class="dropdown">
+                            <a class="toggle" href="index.php">
+                                Hospitals
+                                <img class="arrow" src="images/dropdown-arrow.png" alt="down-arrow" />
+                            </a>
+                            <ul class="dropdown-content">
+                                <li><a href="maps.php">View Map</a></li>
+                                <li><a href="full_list.php">View Full List</a></li>
+                            </ul>
+                        </li>
                         <li><a href="analytics.php">Analytics</a></li>
                         <li><a href="doc.php">Documentation</a></li>
 

@@ -13,7 +13,7 @@ include 'header.php';
                 </div>
 
                 <div class="desig-box">
-                    <label for="Designation Type">Designation Type</label>
+                    <label for="Designation Type">Designation Type (Optional)</label>
                     <select id="Designation Type" name="desig">
                         <option value=""></option>
                         <option value="AIDS Center">AIDS Center</option>
@@ -25,7 +25,7 @@ include 'header.php';
                     </select>
                 </div>
                 <div class="service-box">
-                    <label for="Service Type">Service</label>
+                    <label for="Service Type">Service (Optional)</label>
                     <select id="Service Type" name="service">
                         <option value=""></option>
                         <option value="Ambulatory Surgery - Multi Specialty">Ambulatory Surgery - Multi Specialty
@@ -87,24 +87,8 @@ include 'header.php';
         </div>
     </div>
 
-
-    <!-- <div class="container">
-        <?php
-        // $sql = "SELECT * FROM hospital";
-        // $result = mysqli_query($conn, $sql);
-        // $queryResults = mysqli_num_rows($result);
-        
-        // if ($queryResults > 0) {
-        //     while ($row = mysqli_fetch_assoc($result)) {
-        //         echo "<div
-        //             <h3>" . $row['name'] . "</h3>
-        //             <p>" . $row['location'] . "</p>
-        //             </div>";
-        //     }
-        // }
-        ?>
-    </div> -->
 </main>
+<footer></footer>
 </body>
 
 </html>

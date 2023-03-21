@@ -14,7 +14,7 @@ include('header.php')
                         $desig = mysqli_real_escape_string($conn, $_POST['desig']);
                         $service = mysqli_real_escape_string($conn, $_POST['service']);
                         $query =
-                            "SELECT DISTINCT h.name
+                            "SELECT DISTINCT h.*, b.bor_name
                             FROM hospitals h
                             INNER JOIN is_in i ON h.name = i.hospital_name
                             INNER JOIN borough b ON i.bor_name = b.bor_name
@@ -22,7 +22,7 @@ include('header.php')
                             INNER JOIN designations d ON de.des_name = d.des_name
                             INNER JOIN perform p ON h.name = p.hospital_name
                             INNER JOIN services s ON p.ser_name = s.ser_name
-                            WHERE b.bor_name LIKE '$bor'";
+                            WHERE b.bor_name LIKE '%$bor%'";
 
                         if (!empty($service)) {
                             $query .= " AND s.ser_name = '$service'";
@@ -37,15 +37,16 @@ include('header.php')
                                     <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Location</th>
-                                        <th>Care Type</th>
-                                        <th>Facility Type</th>
+                                        <th>Address</th>
+                                        <th>Borough</th>
                                     </tr>
                                     </thead>
                                     <tbody>";
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo "<tr>
                                         <td>" . $row['name'] . "</td>
+                                        <td>" . $row['address'] . "</td>
+                                        <td>" . $row['bor_name'] . "</td>
                                     </tr>";
                             }
                         } else {
