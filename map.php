@@ -11,6 +11,7 @@ include 'header.php';
 </script>
 <script src="script.js"></script>
 <footer></footer>
+
 </body>
 
 </html>

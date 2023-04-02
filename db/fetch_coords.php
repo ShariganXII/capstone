@@ -1,15 +1,15 @@
 <?php
 include('db.php');
 
-$sql = "SELECT lat, lon FROM hospitals";
-$result = $conn->query($sql);
-$locations = array();
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $locations[] = array('lat' => $row['lat'], 'lng' => $row['lon']);
-    }
-}
-$conn->close();
+$sql = "SELECT lat, lng FROM hospitals2";
+$result = mysqli_query($conn, $sql);
 
-echo json_encode($locations);
+// Convert the result to a JSON object and return it
+$data = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
+
+}
+
+echo json_encode($data);
 ?>
