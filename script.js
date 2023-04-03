@@ -74,29 +74,36 @@ getLocations(function (locationsArray) {
     };
   };
 
-  // Create a new function to handle marker and infowindow creation
-  function createMarker(latlngset, map, content) {
-    var marker = new google.maps.Marker({
-      position: latlngset,
-      map: map,
-    });
+  // Declare a variable to store the currently open InfoWindow outside the createMarker function
+var currentInfoWindow = null;
 
-    var infowindow = new google.maps.InfoWindow({
-      content: content,
-    });
+function createMarker(latlngset, map, content) {
+  var marker = new google.maps.Marker({
+    position: latlngset,
+    map: map,
+  });
 
-    var infoWindowOpen = false;
-    marker.addListener("click", () => {
-      if (infoWindowOpen) {
-        // If the InfoWindow is open, close it
-        infowindow.close();
-        infoWindowOpen = false;
-      } else {
-        // If the InfoWindow is closed, open it
-        infowindow.open(map, marker);
-        infoWindowOpen = true;
+  var infowindow = new google.maps.InfoWindow({
+    content: content,
+  });
+
+  marker.addListener("click", () => {
+    // If the clicked marker's InfoWindow is already open, close it
+    if (infowindow === currentInfoWindow) {
+      infowindow.close();
+      currentInfoWindow = null;
+    } else {
+      // If there's another open InfoWindow, close it
+      if (currentInfoWindow) {
+        currentInfoWindow.close();
       }
-    });
-  };
+
+      // Open the clicked marker's InfoWindow and set it as the currentInfoWindow
+      infowindow.open(map, marker);
+      currentInfoWindow = infowindow;
+    }
+  });
+}
+
   initMap();
 });
