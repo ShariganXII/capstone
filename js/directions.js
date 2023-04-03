@@ -1,6 +1,6 @@
 var urlParams = new URLSearchParams(window.location.search);
 var lat = urlParams.get('lat');
-var lon = urlParams.get('lon');
+var lng = urlParams.get('lng');
 
 function initMap() {
     const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -19,7 +19,7 @@ function initMap() {
 }
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     const selectedMode = document.getElementById("mode").value;
-    var selectedHospital = new google.maps.LatLng(lat, lon);
+    var selectedHospital = new google.maps.LatLng(lat, lng);
   
     // Get the user's current location
     if (navigator.geolocation) {

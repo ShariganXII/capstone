@@ -43,51 +43,53 @@ var locationsArray;
 // Function to retrieve locations data
 function getLocations(callback) {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      var locations = JSON.parse(this.responseText);
-      location_local = createArray(locations);
-      callback(location_local);
+      locationsArray = JSON.parse(this.responseText);
+      callback(locationsArray);
     }
   };
-  xhttp.open("GET", "db/fetch_coords.php", true);
+  xhttp.open("GET", "db/fetch_info.php", true);
   xhttp.send();
 }
 
-function createArray(locations) {
-  var literalArray = [];
-  for (var key in locations) {
-    if (locations.hasOwnProperty(key)) {
-      var lat = parseFloat(locations[key].lat);
-      var lng = parseFloat(locations[key].lng);
-      var location = { lat: lat, lng: lng };
-      literalArray.push(location);
-    }
-  }
-  return literalArray;
-}
-// getLocations(function(location_local) {
-//   console.log(location_local);
-//   });
-// Call the getLocations function to fetch the data
-getLocations(function(location_local) {
-  // Function to initialize the map and add markers for the locations
+getLocations(function (locationsArray) {
   function initMap() {
-    var center = {lat: 40.7128, lng: -74.0060};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    var center = { lat: 40.7128, lng: -74.0060 };
+    var mapOption = {
       zoom: 11,
-      center: center
+      center: center,
+    };
+    var map = new google.maps.Map(document.getElementById("map"), mapOption);
+
+    for (var i = 0; i < locationsArray.length; i++) {
+      var lat = parseFloat(locationsArray[i][2]);
+      var lng = parseFloat(locationsArray[i][3]);
+      var address = locationsArray[i].address;
+      var name = locationsArray[i].name;
+      var content = "test";
+      var latlngset = new google.maps.LatLng(lat, lng);
+
+      createMarker(latlngset, map, content);
+    };
+  };
+
+  // Create a new function to handle marker and infowindow creation
+  function createMarker(latlngset, map, content) {
+    var marker = new google.maps.Marker({
+      position: latlngset,
+      map: map,
     });
 
-    // Add each location as a marker on the map
-    for (var i = 0; i < location_local.length; i++) {
-      var marker = new google.maps.Marker({
-        position: location_local[i],
-        map: map
-      });
-    }
-  }
+    var infowindow = new google.maps.InfoWindow({
+      content: content,
+      arialLabel: "Test",
+    });
 
-  // Call the initMap function to initialize the map
+    marker.addListener("click", () => {
+      infowindow.open(map, marker);
+    });
+  };
+
   initMap();
 });

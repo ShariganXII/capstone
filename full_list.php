@@ -46,7 +46,7 @@ include('header.php')
                                 <td>" . $row['name'] . "</td>
                                 <td>" . $row['address'] . "</td>
                                 <td>" . $row['bor_name'] . "</td>
-                                <td><a href='direction_map.php?lat=" . urlencode($row['lat']) . "&lon=" . urlencode($row['lng']) . "'><button>Directions</button></a></td>
+                                <td><a href='direction_map.php?lat=" . urlencode($row['lat']) . "&lng=" . urlencode($row['lng']) . "'><button>Directions</button></a></td>
                             </tr>";
                     }
                     echo "</tbody></table>";
