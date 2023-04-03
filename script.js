@@ -63,11 +63,11 @@ getLocations(function (locationsArray) {
     var map = new google.maps.Map(document.getElementById("map"), mapOption);
 
     for (var i = 0; i < locationsArray.length; i++) {
-      var lat = parseFloat(locationsArray[i][2]);
-      var lng = parseFloat(locationsArray[i][3]);
+      var lat = parseFloat(locationsArray[i].lat);
+      var lng = parseFloat(locationsArray[i].lng);
       var address = locationsArray[i].address;
       var name = locationsArray[i].name;
-      var content = "test";
+      var content = name + " " + address;
       var latlngset = new google.maps.LatLng(lat, lng);
 
       createMarker(latlngset, map, content);
@@ -83,7 +83,6 @@ getLocations(function (locationsArray) {
 
     var infowindow = new google.maps.InfoWindow({
       content: content,
-      arialLabel: "Test",
     });
 
     marker.addListener("click", () => {
