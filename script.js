@@ -67,7 +67,10 @@ getLocations(function (locationsArray) {
       var lng = parseFloat(locationsArray[i].lng);
       var address = locationsArray[i].address;
       var name = locationsArray[i].name;
-      var content = name + " " + address;
+      var content = "<p>name: " + name + "</p>" +
+      "<p>Address: " + address + "</p>" +
+      "<a href='direction_map.php?lat=" + encodeURIComponent(lat) + "&lng=" + encodeURIComponent(lng) + "'><button>Directions</button></a>";
+    
       var latlngset = new google.maps.LatLng(lat, lng);
 
       createMarker(latlngset, map, content);
