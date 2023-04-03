@@ -85,10 +85,18 @@ getLocations(function (locationsArray) {
       content: content,
     });
 
+    var infoWindowOpen = false;
     marker.addListener("click", () => {
-      infowindow.open(map, marker);
+      if (infoWindowOpen) {
+        // If the InfoWindow is open, close it
+        infowindow.close();
+        infoWindowOpen = false;
+      } else {
+        // If the InfoWindow is closed, open it
+        infowindow.open(map, marker);
+        infoWindowOpen = true;
+      }
     });
   };
-
   initMap();
 });
