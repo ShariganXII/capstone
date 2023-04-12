@@ -15,7 +15,7 @@ include 'db\db.php';
     <title>ISI490 Capstone</title>
 </head>
 
-<body>
+<body onload="getLocation()">
     <header>
         <div class="nav">
             <nav>

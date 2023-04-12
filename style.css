@@ -29,9 +29,13 @@ nav {
   background-color: #533279;
   color: white;
 }
+.logo {
+  height: 11rem;
+  position: relative;
+}
 nav img {
-  height: 11.5rem;
-  width: auto;
+  height: 100%;
+  width: 100%;
 }
 
 nav ul {
@@ -40,7 +44,6 @@ nav ul {
   display: flex;
   text-align: center;
   justify-content: space-around;
-  gap: 2rem;
 }
 
 nav ul li {
@@ -62,6 +65,7 @@ a:hover {
   background: #d88ce2;
   transition: 0.5s ease;
 }
+
 .toggle-button {
   position: absolute;
   right: 1rem;
@@ -104,7 +108,7 @@ a:hover {
   border: 1px solid white;
   text-align: left;
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   /* .nav .toggle-button{
           display: flex;
       } */
