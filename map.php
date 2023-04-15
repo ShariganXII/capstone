@@ -18,7 +18,7 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById("map"), mapOption);
 }
 </script>
-<script
+<script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&callback=initMap&v=weekly">
 </script>
 <script src="script.js"></script>
