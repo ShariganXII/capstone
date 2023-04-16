@@ -1,10 +1,9 @@
 <?php
 include 'header.php';
 
-$submitted = false; // Initialize variable
+$submitted = false; 
 if (isset($_POST['submit-search'])) {
-    $submitted = true; // Set to true if form is submitted
-    // ...
+    $submitted = true; 
 }
 ?>
 
@@ -16,7 +15,9 @@ if (isset($_POST['submit-search'])) {
                 <div class="coord">
                     <button class="get-coord" type="button" onclick="getLocation()">
                         <img class="coord-icon" src="images/location-icon.png" alt="get coordinates">
+                        Use my Location
                     </button>
+
                 </div>
 
                 <div class="location-box">
@@ -101,12 +102,12 @@ if (isset($_POST['submit-search'])) {
     </div>
 
     <?php if ($submitted) { ?>
-        <div class="index-search">
-            <div class="box-container">
-                <div class="search-wrapper">
-                    <h1>Search Result</h1>
-                    <div class="result-box">
-                        <?php
+    <div class="index-search">
+        <div class="box-container">
+            <div class="search-wrapper">
+                <h1>Search Result</h1>
+                <div class="result-box">
+                    <?php
                         if (isset($_POST['submit-search'])) {
                             $bor = mysqli_real_escape_string($conn, $_POST['bor']);
                             $desig = mysqli_real_escape_string($conn, $_POST['desig']);
@@ -154,10 +155,10 @@ if (isset($_POST['submit-search'])) {
                             }
                         }
                         ?>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     <?php } ?>
 </main>
 <footer></footer>

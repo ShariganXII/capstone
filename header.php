@@ -22,7 +22,11 @@ include 'db\db.php';
                 <div class="logo">
                     <img src="images\logo.jpeg" alt="logo" />
                 </div>
-
+                <div class="address-box">
+                    <div class="address">
+                        <p>Test address</p>
+                    </div>
+                </div>
                 <div class="nav-links">
                     <ul>
                         <li><a href="index.php" id="menu-index">Home</a></li>
