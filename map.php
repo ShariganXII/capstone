@@ -1,5 +1,6 @@
 <?php
 include 'header.php';
+
 ?>
 <main class="map-main">
     <div id="map"></div>
@@ -18,9 +19,9 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById("map"), mapOption);
 }
 </script>
-<script async
+<!-- <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&callback=initMap&v=weekly">
-</script>
+</script> -->
 <script src="script.js"></script>
 <footer></footer>
 

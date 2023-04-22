@@ -1,5 +1,12 @@
 <?php
 include 'db\db.php';
+session_start();
+
+$addr_set = false;
+if (isset($_POST['address-input'])) {
+    $_SESSION['address'] = $_POST['address-input'];
+    $addr_set = true;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,18 +22,25 @@ include 'db\db.php';
     <title>ISI490 Capstone</title>
 </head>
 
-<body onload="getLocation()">
+<body>
     <header>
         <div class="nav">
             <nav>
                 <div class="logo">
                     <img src="images\logo.jpeg" alt="logo" />
                 </div>
+
+
+                <form method="POST" class='addr-form'">
+                    <label for=" address-input">Enter Address</label>
+                    <input type="text" id="address-input" name="address-input" placeholder="Search" />
+                    <button type="submit" name="addr-submit">Submit</button>
+                </form>
+
                 <div class="address-box">
-                    <div class="address">
-                        <p>Test address</p>
-                    </div>
+                    <p id="address"></p>
                 </div>
+
                 <div class="nav-links">
                     <ul>
                         <li><a href="index.php" id="menu-index">Home</a></li>
@@ -47,7 +61,11 @@ include 'db\db.php';
                     </ul>
                 </div>
             </nav>
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&libraries=places&callback=init">
+            </script>
         </div>
+
     </header>
 </body>
 

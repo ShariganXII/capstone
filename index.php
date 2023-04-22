@@ -1,6 +1,5 @@
 <?php
 include 'header.php';
-
 $submitted = false; 
 if (isset($_POST['submit-search'])) {
     $submitted = true; 
@@ -8,21 +7,27 @@ if (isset($_POST['submit-search'])) {
 ?>
 
 <main class="index-main">
+
+    <!-- <div class="box-container">
+        <div class="wrapper">
+
+            <div class="coord">
+                <button class="get-coord" type="button" onclick="getLocation()">
+                    <img class="coord-icon" src="images/location-icon.png" alt="get coordinates">
+                    Use my Location
+                </button>
+            </div>
+
+        </div>
+    </div> -->
+
     <div class='box-container'>
         <div class='wrapper'>
             <form method="POST" class='index-form'>
 
-                <div class="coord">
-                    <button class="get-coord" type="button" onclick="getLocation()">
-                        <img class="coord-icon" src="images/location-icon.png" alt="get coordinates">
-                        Use my Location
-                    </button>
-
-                </div>
-
                 <div class="location-box">
                     <label for="location">Location*</label>
-                    <input type="text" name="bor" placeholder="Enter borough" required>
+                    <input type="text" id="location-box" name="bor" placeholder="Enter borough" required>
                 </div>
 
                 <div class="desig-box">
@@ -37,6 +42,7 @@ if (isset($_POST['submit-search'])) {
                         <option value="Trauma Center">Trauma Center</option>
                     </select>
                 </div>
+
                 <div class="service-box">
                     <label for="Service Type">Service (Optional)</label>
                     <select id="Service Type" name="service">
@@ -101,6 +107,7 @@ if (isset($_POST['submit-search'])) {
         </div>
     </div>
 
+
     <?php if ($submitted) { ?>
     <div class="index-search">
         <div class="box-container">
@@ -162,6 +169,8 @@ if (isset($_POST['submit-search'])) {
     <?php } ?>
 </main>
 <footer></footer>
+
+
 <script src="script.js"></script>
 </body>
 

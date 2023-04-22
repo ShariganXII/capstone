@@ -1,6 +1,6 @@
 /* Main page styling */
 * {
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
   padding: 0;
   margin: 0;
   font-family: sans-serif;
@@ -86,6 +86,9 @@ a:hover {
   height: 15px;
   vertical-align: middle;
 }
+.dropdown {
+  position: relative;
+}
 .dropdown-content {
   display: none;
   position: absolute;
@@ -107,6 +110,13 @@ a:hover {
   background-color: #533279;
   border: 1px solid white;
   text-align: left;
+}
+.show {
+  display: block;
+}
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #a83e9a;
 }
 @media (max-width: 700px) {
   /* .nav .toggle-button{
@@ -175,11 +185,11 @@ body {
   height: 90%;
   margin-bottom: 5rem;
 }
-
 .wrapper {
   width: 60vw;
   height: 500px;
   display: flex;
+  flex-direction: column;
   background-color: white;
   justify-content: center;
   align-items: center;
