@@ -11,7 +11,7 @@ for (var i = 0; i < menuItems.length; i++) {
   }
 }
 
-// Add an event listener to the form
+// Add an event listener to the address form
 document.querySelector('.addr-form').addEventListener('submit', function(event) {
   event.preventDefault();
 
