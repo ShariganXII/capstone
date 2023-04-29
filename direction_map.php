@@ -16,7 +16,7 @@ include 'header.php';
         <div id="sidebar"></div>
     </div>
     <script src="script.js"></script>
-    <script src="js/directions.js"></script>
+    <script defer src="js/directions.js"></script>
 </main>
 
 <footer></footer>

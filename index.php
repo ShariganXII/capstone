@@ -143,34 +143,20 @@ if (isset($_POST['submit-search'])) {
                             $lng = $_COOKIE["lng"];
                             $bed = mysqli_real_escape_string($conn, $_POST['bed']);
                             $radius = mysqli_real_escape_string($conn, $_POST['radius']);
-                            // if ($radius) {
-                            //     $query = "SELECT DISTINCT h.*, b.bor_name, 
-                            //               ( 3959 * acos( cos( radians($lat) ) * cos( radians( h.lat ) ) 
-                            //               * cos( radians( h.lng ) - radians($lng) ) + sin( radians($lat) ) 
-                            //               * sin( radians( h.lat ) ) ) ) AS distance
-                            //               FROM hospitals h
-                            //               INNER JOIN is_in i ON h.name = i.hospital_name
-                            //               INNER JOIN borough b ON i.bor_name = b.bor_name
-                            //               INNER JOIN designated de ON h.name = de.hospital_name
-                            //               INNER JOIN designations d ON de.des_name = d.des_name
-                            //               INNER JOIN perform p ON h.name = p.hospital_name
-                            //               INNER JOIN services s ON p.ser_name = s.ser_name
-                            //               WHERE b.bor_name LIKE '%$bor%'";
-                            // } else {
-                                $query = "SELECT DISTINCT h.*, b.bor_name";
-                                if ($radius) {
-                                    $query .= ", (3959 * acos(cos(radians($lat)) * cos(radians(h.lat)) 
-                                            * cos(radians(h.lng) - radians($lng)) + sin(radians($lat)) 
-                                            * sin(radians(h.lat)))) AS distance";
-                                }
-                                $query .= " FROM hospitals h
-                                        INNER JOIN is_in i ON h.name = i.hospital_name
-                                        INNER JOIN borough b ON i.bor_name = b.bor_name
-                                        INNER JOIN designated de ON h.name = de.hospital_name
-                                        INNER JOIN designations d ON de.des_name = d.des_name
-                                        INNER JOIN perform p ON h.name = p.hospital_name
-                                        INNER JOIN services s ON p.ser_name = s.ser_name
-                                        WHERE b.bor_name LIKE '%$bor%'";
+                            $query = "SELECT DISTINCT h.*, b.bor_name";
+                            if ($radius) {
+                                $query .= ", (3959 * acos(cos(radians($lat)) * cos(radians(h.lat)) 
+                                        * cos(radians(h.lng) - radians($lng)) + sin(radians($lat)) 
+                                        * sin(radians(h.lat)))) AS distance";
+                            }
+                            $query .= " FROM hospitals h
+                                    INNER JOIN is_in i ON h.name = i.hospital_name
+                                    INNER JOIN borough b ON i.bor_name = b.bor_name
+                                    INNER JOIN designated de ON h.name = de.hospital_name
+                                    INNER JOIN designations d ON de.des_name = d.des_name
+                                    INNER JOIN perform p ON h.name = p.hospital_name
+                                    INNER JOIN services s ON p.ser_name = s.ser_name
+                                    WHERE b.bor_name LIKE '%$bor%'";
 
                             if (!empty($service)) {
                                 $query .= " AND s.ser_name = '$service'";
