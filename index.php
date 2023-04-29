@@ -23,7 +23,7 @@ if (isset($_POST['submit-search'])) {
 
     <div class='box-container'>
         <div class='wrapper'>
-            <form method="POST" class='index-form'>
+            <form method="POST" class='index-form' id='index-form'>
 
                 <div class="location-box">
                     <label for="location">Location*</label>
@@ -31,7 +31,7 @@ if (isset($_POST['submit-search'])) {
                 </div>
 
                 <div class="desig-box">
-                    <label for="Designation Type">Designation Type (Optional)</label>
+                    <label for="Designation Type">Designation Type</label>
                     <select id="Designation Type" name="desig">
                         <option value=""></option>
                         <option value="AIDS Center">AIDS Center</option>
@@ -44,7 +44,7 @@ if (isset($_POST['submit-search'])) {
                 </div>
 
                 <div class="service-box">
-                    <label for="Service Type">Service (Optional)</label>
+                    <label for="Service Type">Service</label>
                     <select id="Service Type" name="service">
                         <option value=""></option>
                         <option value="Ambulatory Surgery - Multi Specialty">Ambulatory Surgery - Multi Specialty
@@ -99,36 +99,78 @@ if (isset($_POST['submit-search'])) {
                     </select>
                 </div>
 
+                <div class="radius-box">
+                    <label for="radius">Mile Radius</label>
+                    <select id="radius" name="radius">
+                        <option value=""></option>
+                        <option value="5">5 miles</option>
+                        <option value="10">10 miles</option>
+                        <option value="15">15 miles</option>
+                        <option value="20">20 miles</option>
+                        <option value="25">25 miles</option>
+                        <option value="30">30 miles</option>
+                    </select>
+                </div>
+                <div class="bed-box">
+                    <label for="bed">Bed Available</label>
+                    <select id="bed" name="bed">
+                        <option value=""></option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                        <option value="500">500</option>
+                    </select>
+                </div>
                 <div class="submit-button">
                     <button type="submit" name="submit-search" onclick="showSearchResult()">submit</button>
                 </div>
 
             </form>
-        </div>
-    </div>
 
-
-    <?php if ($submitted) { ?>
-    <div class="index-search">
-        <div class="box-container">
-            <div class="search-wrapper">
-                <h1>Search Result</h1>
-                <div class="result-box">
-                    <?php
+            <?php if ($submitted) { ?>
+            <hr>
+            <div class="index-search">
+                <div class="box-container">
+                    <div class="search-wrapper">
+                        <h1>Search Result</h1>
+                        <div class="result-box">
+                            <?php
                         if (isset($_POST['submit-search'])) {
                             $bor = mysqli_real_escape_string($conn, $_POST['bor']);
                             $desig = mysqli_real_escape_string($conn, $_POST['desig']);
                             $service = mysqli_real_escape_string($conn, $_POST['service']);
-                            $query =
-                                "SELECT DISTINCT h.*, b.bor_name
-                                FROM hospitals h
-                                INNER JOIN is_in i ON h.name = i.hospital_name
-                                INNER JOIN borough b ON i.bor_name = b.bor_name
-                                INNER JOIN designated de ON h.name = de.hospital_name
-                                INNER JOIN designations d ON de.des_name = d.des_name
-                                INNER JOIN perform p ON h.name = p.hospital_name
-                                INNER JOIN services s ON p.ser_name = s.ser_name
-                                WHERE b.bor_name LIKE '%$bor%'";
+                            $lat = $_COOKIE["lat"];
+                            $lng = $_COOKIE["lng"];
+                            $bed = mysqli_real_escape_string($conn, $_POST['bed']);
+                            $radius = mysqli_real_escape_string($conn, $_POST['radius']);
+                            // if ($radius) {
+                            //     $query = "SELECT DISTINCT h.*, b.bor_name, 
+                            //               ( 3959 * acos( cos( radians($lat) ) * cos( radians( h.lat ) ) 
+                            //               * cos( radians( h.lng ) - radians($lng) ) + sin( radians($lat) ) 
+                            //               * sin( radians( h.lat ) ) ) ) AS distance
+                            //               FROM hospitals h
+                            //               INNER JOIN is_in i ON h.name = i.hospital_name
+                            //               INNER JOIN borough b ON i.bor_name = b.bor_name
+                            //               INNER JOIN designated de ON h.name = de.hospital_name
+                            //               INNER JOIN designations d ON de.des_name = d.des_name
+                            //               INNER JOIN perform p ON h.name = p.hospital_name
+                            //               INNER JOIN services s ON p.ser_name = s.ser_name
+                            //               WHERE b.bor_name LIKE '%$bor%'";
+                            // } else {
+                                $query = "SELECT DISTINCT h.*, b.bor_name";
+                                if ($radius) {
+                                    $query .= ", (3959 * acos(cos(radians($lat)) * cos(radians(h.lat)) 
+                                            * cos(radians(h.lng) - radians($lng)) + sin(radians($lat)) 
+                                            * sin(radians(h.lat)))) AS distance";
+                                }
+                                $query .= " FROM hospitals h
+                                        INNER JOIN is_in i ON h.name = i.hospital_name
+                                        INNER JOIN borough b ON i.bor_name = b.bor_name
+                                        INNER JOIN designated de ON h.name = de.hospital_name
+                                        INNER JOIN designations d ON de.des_name = d.des_name
+                                        INNER JOIN perform p ON h.name = p.hospital_name
+                                        INNER JOIN services s ON p.ser_name = s.ser_name
+                                        WHERE b.bor_name LIKE '%$bor%'";
 
                             if (!empty($service)) {
                                 $query .= " AND s.ser_name = '$service'";
@@ -136,8 +178,17 @@ if (isset($_POST['submit-search'])) {
                             if (!empty($desig)) {
                                 $query .= " AND d.des_name = '$desig'";
                             }
+                            if (!empty($bed)) {
+                                $query .= " AND h.beds >= '$bed'";
+                            }
+                            // Add the radius condition to the query if the radius is set
+                            if ($radius) {
+                                $query .= " HAVING distance <= $radius";
+                            }
+                            
                             $result = mysqli_query($conn, $query);
                             $queryResult = mysqli_num_rows($result);
+                            
                             if ($queryResult > 0) {
                                 echo "<table>
                                         <thead>
@@ -146,6 +197,7 @@ if (isset($_POST['submit-search'])) {
                                             <th>Address</th>
                                             <th>Borough</th>
                                             <th>Directions</th>
+                                            <th>Beds</th>
                                         </tr>
                                         </thead>
                                         <tbody>";
@@ -154,6 +206,7 @@ if (isset($_POST['submit-search'])) {
                                             <td>" . $row['name'] . "</td>
                                             <td>" . $row['address'] . "</td>
                                             <td>" . $row['bor_name'] . "</td>
+                                            <td>" . $row['beds'] . "</td>
                                             <td><a href='direction_map.php?lat=" . urlencode($row['lat']) . "&lng=" . urlencode($row['lng']) . "'><button>Directions</button></a></td>
                                         </tr>";
                                 }
@@ -162,16 +215,17 @@ if (isset($_POST['submit-search'])) {
                             }
                         }
                         ?>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
-    <?php } ?>
+    <script src="script.js"></script>
 </main>
 <footer></footer>
 
-
-<script src="script.js"></script>
 </body>
 
 </html>

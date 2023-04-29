@@ -13,7 +13,8 @@ include('header.php')
                             h.address,
                             b.bor_name,
                             h.lat,
-                            h.lng
+                            h.lng,
+                            h.beds
                         FROM hospitals h
                             INNER JOIN is_in i ON h.name = i.hospital_name
                             INNER JOIN borough b ON i.bor_name = b.bor_name
@@ -30,7 +31,8 @@ include('header.php')
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Borough</th>
-                                    <td>Directions</td>
+                                    <th>Beds Available</th>
+                                    <th>Directions</th>
                                 </tr>
                             </thead>
                             <tbody>";
@@ -39,13 +41,14 @@ include('header.php')
                     while ($row = mysqli_fetch_assoc($result)) {
                         $currBorough = $row['bor_name'];
                         if ($currBorough !== $prevBorough) {
-                            echo "<tr><td colspan='4'><h1>$currBorough</h1></td></tr>";
+                            echo "<tr><td colspan='4'><h2>$currBorough</h2></td></tr>";
                             $prevBorough = $currBorough;
                         }
                         echo "<tr>
                                 <td>" . $row['name'] . "</td>
                                 <td>" . $row['address'] . "</td>
                                 <td>" . $row['bor_name'] . "</td>
+                                <td>" . $row['beds'] . "</td>
                                 <td><a href='direction_map.php?lat=" . urlencode($row['lat']) . "&lng=" . urlencode($row['lng']) . "'><button>Directions</button></a></td>
                             </tr>";
                     }
@@ -58,8 +61,9 @@ include('header.php')
 
         </div>
     </div>
+    <script src="script.js"></script>
 </main>
-<script src="script.js"></script>
+
 </body>
 
 </html>

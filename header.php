@@ -19,6 +19,9 @@ if (isset($_POST['address-input'])) {
     <link rel="stylesheet" href="node_modules\milligram\dist\milligram.css" />
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&libraries=places&callback=init">
+    </script>
     <title>ISI490 Capstone</title>
 </head>
 
@@ -40,7 +43,10 @@ if (isset($_POST['address-input'])) {
                 <div class="address-box">
                     <p id="address"></p>
                 </div>
-
+                <div class="coord-test">
+                    <p id="lat"></p>
+                    <p id="lng"></p>
+                </div>
                 <div class="nav-links">
                     <ul>
                         <li><a href="index.php" id="menu-index">Home</a></li>
@@ -61,9 +67,7 @@ if (isset($_POST['address-input'])) {
                     </ul>
                 </div>
             </nav>
-            <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&libraries=places&callback=init">
-            </script>
+
         </div>
 
     </header>

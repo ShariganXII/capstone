@@ -15,14 +15,10 @@ include 'header.php';
         <div id="map"></div>
         <div id="sidebar"></div>
     </div>
-
+    <script src="script.js"></script>
+    <script src="js/directions.js"></script>
 </main>
-<!-- <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&callback=initMap&v=weekly"
-    defer></script>
-</script> -->
-<script src="script.js"></script>
-<script src="js/directions.js"></script>
+
 <footer></footer>
 </body>
 

@@ -100,10 +100,12 @@ function init() {
   // Autocomplete form
   initAutocomplete();
 
+  if(document.getElementById("map")) {
   // Retrieve locations data and initialize the map
   getLocations(function (locationsArray) {
     initMap(locationsArray);
   });
+}
 }
 
 // Function to retrieve locations data
@@ -152,6 +154,29 @@ async function handleAddressSubmission() {
   }
 }
 
+const storedLat = parseFloat(localStorage.getItem('storedLat'));
+const storedLng = parseFloat(localStorage.getItem('storedLng'));
+$(document).ready(function () {
+    createCookie("lat", storedLat , "10");
+    createCookie("lng", storedLng , "10");
+});
+   
+// Function to create the cookie
+function createCookie(name, value, days) {
+    var expires;
+      
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+      
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+
+}
 var map;
 if(document.getElementById("map")) {
   function initMap() {
