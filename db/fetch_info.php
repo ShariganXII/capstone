@@ -1,7 +1,7 @@
 <?php
 include('db.php');
 
-$sql = "SELECT name, address, lat, lng FROM hospitals";
+$sql = "SELECT name, address, lat, lng, rating FROM hospitals";
 $result = mysqli_query($conn, $sql);
 
 // Convert the result to a JSON object and return it

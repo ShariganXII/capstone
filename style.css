@@ -9,17 +9,9 @@
   text-decoration: none;
 }
 main * {
-  font-size: 2rem;
+  font-size: 1.8rem;
   /* padding: 0;
   margin: 0; */
-}
-body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-body::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
 }
 
 nav {
@@ -28,14 +20,21 @@ nav {
   align-items: center;
   background-color: #533279;
   color: white;
+  height: 12.5rem;
 }
 .logo {
-  height: 11rem;
+  height: 100%;
   position: relative;
 }
 nav img {
   height: 100%;
   width: 100%;
+}
+#address-info img {
+  width: 30px;
+  float: right;
+  position: relative;
+  bottom: 33.5px;
 }
 
 nav ul {
@@ -111,12 +110,35 @@ nav a:hover {
   border: 1px solid white;
   text-align: left;
 }
-.show {
-  display: block;
-}
 .dropbtn:hover,
 .dropbtn:focus {
   background-color: #a83e9a;
+}
+.address-box {
+  height: 100%;
+}
+.addr-form {
+  margin: 0;
+  height: 100%;
+}
+#change-address-button {
+  background-color: #533279;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  margin: 0;
+}
+#address {
+  font-size: 1.5rem;
+}
+#address-info {
+  position: relative;
+  bottom: 2rem;
+}
+#address-info p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 650;
 }
 @media (max-width: 700px) {
   /* .nav .toggle-button{
@@ -147,6 +169,10 @@ nav a:hover {
     width: 0;
   }
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
 body {
   background-image: url("images/bg.jpg");
   background-attachment: fixed;
@@ -154,6 +180,9 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Styling search and doc page */
@@ -194,16 +223,27 @@ body {
   margin: 10rem;
   padding: 5rem;
 }
+.index-text-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.index-text-box h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 2rem;
+}
 .index-form {
   display: flex;
-  width: 30vw;
+  width: 50%;
   padding: 5rem 4rem;
   flex-direction: column;
   justify-content: space-evenly;
+  gap: 1rem;
 }
 .submit-button {
-  font-size: 55px;
-  top: 0.4rem;
+  font-size: 5rem;
 }
 .submit-button button {
   padding: 0 3rem;
@@ -264,6 +304,47 @@ hr {
 }
 .coord-icon {
   height: 70%;
+}
+
+.location-box {
+  width: 100%;
+  border-bottom: 1.5px solid black;
+  border-radius: 0;
+}
+#location-box {
+  border: 0;
+  padding: 0;
+}
+#location-box::placeholder {
+  font-size: 2rem;
+}
+.location-box {
+  display: flex;
+  height: 5rem;
+  margin: 3rem 0;
+}
+.location-box img {
+  position: relative;
+  height: 80%;
+  opacity: 70%;
+}
+.advanced-search-box {
+  display: inherit;
+  flex-direction: column;
+}
+.advanced-search-box span {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+.advanced-search {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 5rem;
+}
+.advanced-search select {
+  border: 0;
+  border-bottom: 1px solid black;
+  border-radius: 0;
 }
 
 /* Styling doc page */

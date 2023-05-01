@@ -1,3 +1,11 @@
+function displayAddressBox() {
+  var addressBox = document.querySelector('.address-box');
+  if (addressBox.style.display === 'none' || addressBox.style.display === '') {
+    addressBox.style.display = 'flex';
+  } else {
+    addressBox.style.display = 'none';
+  }
+}
 // Get the current page URL
 var currentPageUrl = window.location.href;
 
@@ -203,8 +211,10 @@ function initializeMapWithData(locationsArray, map) {
     var lng = parseFloat(locationsArray[i].lng);
     var address = locationsArray[i].address;
     var name = locationsArray[i].name;
+    var rating = locationsArray[i].rating;
     var content = "<p>name: " + name + "</p>" +
     "<p>Address: " + address + "</p>" +
+    "<p>Rating: " + rating + "</p>" +
     "<a href='direction_map.php?lat=" + encodeURIComponent(lat) + "&lng=" + encodeURIComponent(lng) + "'><button>Directions</button></a>";
 
     var latlngset = new google.maps.LatLng(lat, lng);

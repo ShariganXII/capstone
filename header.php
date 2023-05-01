@@ -32,21 +32,24 @@ if (isset($_POST['address-input'])) {
                 <div class="logo">
                     <img src="images\logo.jpeg" alt="logo" />
                 </div>
-
-
-                <form method="POST" class='addr-form'">
-                    <label for=" address-input">Enter Address</label>
-                    <input type="text" id="address-input" name="address-input" placeholder="Search" />
-                    <button type="submit" name="addr-submit">Submit</button>
-                </form>
-
-                <div class="address-box">
-                    <p id="address"></p>
+                <div id="change-address-box">
+                    <button type="button" id="change-address-button" onclick="displayAddressBox()">
+                        <div id="address-info">
+                            <p>Your Address</p>
+                            <img src="images/edit.png" alt="edit button">
+                            <p id="address"></p>
+                        </div>
+                    </button>
                 </div>
-                <div class="coord-test">
-                    <p id="lat"></p>
-                    <p id="lng"></p>
+
+                <div class="address-box" style=" display: none">
+                    <form method="POST" class='addr-form'">
+                        <label for=" address-input">Enter Address</label>
+                        <input type="text" id="address-input" name="address-input" placeholder="Search" />
+                        <button type="submit" name="addr-submit" onclick="displayAddressBox()">Submit</button>
+                    </form>
                 </div>
+
                 <div class="nav-links">
                     <ul>
                         <li><a href="index.php" id="menu-index">Home</a></li>
