@@ -1,5 +1,12 @@
 <?php
 include 'db\db.php';
+session_start();
+
+$addr_set = false;
+if (isset($_POST['address-input'])) {
+    $_SESSION['address'] = $_POST['address-input'];
+    $addr_set = true;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +19,9 @@ include 'db\db.php';
     <link rel="stylesheet" href="node_modules\milligram\dist\milligram.css" />
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&libraries=places&callback=init">
+    </script>
     <title>ISI490 Capstone</title>
 </head>
 
@@ -21,6 +31,23 @@ include 'db\db.php';
             <nav>
                 <div class="logo">
                     <img src="images\logo.jpeg" alt="logo" />
+                </div>
+                <div id="change-address-box">
+                    <button type="button" id="change-address-button" onclick="displayAddressBox()">
+                        <div id="address-info">
+                            <p>Your Address</p>
+                            <img src="images/edit.png" alt="edit button">
+                            <p id="address"></p>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="address-box" style=" display: none">
+                    <form method="POST" class='addr-form'">
+                        <label for=" address-input">Enter Address</label>
+                        <input type="text" id="address-input" name="address-input" placeholder="Search" />
+                        <button type="submit" name="addr-submit" onclick="displayAddressBox()">Submit</button>
+                    </form>
                 </div>
 
                 <div class="nav-links">
@@ -43,7 +70,9 @@ include 'db\db.php';
                     </ul>
                 </div>
             </nav>
+
         </div>
+
     </header>
 </body>
 

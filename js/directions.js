@@ -17,14 +17,46 @@ function initMap() {
     });
     directionsRenderer.setPanel(document.getElementById("sidebar"));
 }
+// function getLocation(callback) {
+//   if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition(function(position) {
+//           var latitude = position.coords.latitude;
+//           var longitude = position.coords.longitude;
+//           if (typeof callback === 'function') {
+//               callback({ latitude, longitude });
+//           }
+//       },
+//       function(error){
+//           showError(error);
+//       });
+//   } else {
+//       alert("Geolocation is not supported by this browser.") ;
+//   }
+// }
+// function showError(error) {
+// switch(error.code) {
+//   case error.PERMISSION_DENIED:
+//     alert("User denied the request for Geolocation.")
+//     break;
+//   case error.POSITION_UNAVAILABLE:
+//     alert("Location information is unavailable.")
+//     break;
+//   case error.TIMEOUT:
+//     alert("The request to get user location timed out.")
+//     break;
+//   case error.UNKNOWN_ERROR:
+//     alert("An unknown error occurred.")
+//     break;
+// }
+// }
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     const selectedMode = document.getElementById("mode").value;
     var selectedHospital = new google.maps.LatLng(lat, lng);
-  
+    const storedLat = parseFloat(localStorage.getItem('storedLat'));
+    const storedLng = parseFloat(localStorage.getItem('storedLng'));
     // Get the user's current location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    if (storedLat && storedLng) {
+      var userLocation = new google.maps.LatLng(storedLat, storedLng);
   
         // Calculate the directions
         directionsService
@@ -37,11 +69,8 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
             directionsRenderer.setDirections(response);
           })
           .catch((e) => window.alert("Directions request failed due to " + e));
-      });
-    } else {
-      alert('Geolocation is not supported by this browser.');
-    }
-  }
+      };
+    };
   
   window.initMap = initMap;
   
