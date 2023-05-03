@@ -19,7 +19,7 @@ if (isset($_POST['address-input'])) {
     <link rel="stylesheet" href="node_modules\milligram\dist\milligram.css" />
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script async defer
+    <script async
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&libraries=places&callback=init">
     </script>
     <title>ISI490 Capstone</title>
