@@ -212,10 +212,12 @@ function initializeMapWithData(locationsArray, map) {
     var address = locationsArray[i].address;
     var name = locationsArray[i].name;
     var rating = locationsArray[i].rating;
-    var content = "<p>name: " + name + "</p>" +
+    var content = "<div class = infowindow-box> <p>Name: " + name + "</p>" +
     "<p>Address: " + address + "</p>" +
     "<p>Rating: " + rating + "</p>" +
-    "<a href='direction_map.php?lat=" + encodeURIComponent(lat) + "&lng=" + encodeURIComponent(lng) + "'><button>Directions</button></a>";
+    "<a href='direction_map.php?lat=" + encodeURIComponent(lat) + "&lng=" + encodeURIComponent(lng) + "'><button>Directions</button></a>" +
+    "<br>" +
+    "<a href='info_page.php?name=" + encodeURIComponent(name) + "'target= _blank><button>More Info</button></a> </div>";
 
     var latlngset = new google.maps.LatLng(lat, lng);
 
