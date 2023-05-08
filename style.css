@@ -30,11 +30,13 @@ nav img {
   height: 100%;
   width: 100%;
 }
+#your-address-with-button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 #address-info img {
   width: 30px;
-  float: right;
-  position: relative;
-  bottom: 33.5px;
 }
 
 nav ul {
@@ -468,4 +470,33 @@ hr {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+/* Styling for info page */
+.info-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 2rem;
+}
+.info-wrapper h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.info-wrapper h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.info-wrapper p {
+  font-size: 2rem;
+  line-height: 3rem;
+}
+.info-wrapper div {
+  padding: 2rem;
+}
+.info-wrapper div {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.general-info-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

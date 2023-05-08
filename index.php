@@ -267,6 +267,8 @@ if (isset($_POST['submit-search'])) {
                                             <th>Borough</th>
                                             <th>Beds</th>
                                             <th>Rating</th>
+                                            <th>Show Directions</th>
+                                            <th>Show More Info</th>
                                         </tr>
                                         </thead>
                                         <tbody>";
@@ -278,6 +280,7 @@ if (isset($_POST['submit-search'])) {
                                             <td>" . $row['beds'] . "</td>
                                             <td>" . $row['rating'] . "</td>
                                             <td><a href='direction_map.php?lat=" . urlencode($row['lat']) . "&lng=" . urlencode($row['lng']) . "'><button>Directions</button></a></td>
+                                            <td><a href='info_page.php?name=" . urlencode($row['name']) . "'target= _blank><button>More Info</button></a></td>
                                         </tr>";
                                 }
                             } else {
