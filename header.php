@@ -1,5 +1,6 @@
 <?php
 include 'db\db.php';
+include 'key.php';
 session_start();
 
 $addr_set = false;
@@ -20,7 +21,7 @@ if (isset($_POST['address-input'])) {
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHbWUx1VLSARPGsYrr_sWlR_f_roMwIpw&libraries=places&callback=init">
+        src="https://maps.googleapis.com/maps/api/js?key=<?php echo $apikey ?>&libraries=places&callback=init">
     </script>
     <title>ISI490 Capstone</title>
 </head>
@@ -35,8 +36,10 @@ if (isset($_POST['address-input'])) {
                 <div id="change-address-box">
                     <button type="button" id="change-address-button" onclick="displayAddressBox()">
                         <div id="address-info">
-                            <p>Your Address</p>
-                            <img src="images/edit.png" alt="edit button">
+                            <div id="your-address-with-button">
+                                <p>Your Address</p>
+                                <img src="images/edit.png" alt="edit button">
+                            </div>
                             <p id="address"></p>
                         </div>
                     </button>
