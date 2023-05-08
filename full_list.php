@@ -14,7 +14,8 @@ include('header.php')
                             b.bor_name,
                             h.lat,
                             h.lng,
-                            h.beds
+                            h.beds,
+                            h.rating
                         FROM hospitals h
                             INNER JOIN is_in i ON h.name = i.hospital_name
                             INNER JOIN borough b ON i.bor_name = b.bor_name
@@ -32,6 +33,7 @@ include('header.php')
                                     <th>Address</th>
                                     <th>Borough</th>
                                     <th>Beds Available</th>
+                                    <th>Rating</th>
                                     <th>Directions</th>
                                     <th>More Info</th>
                                 </tr>
@@ -50,6 +52,7 @@ include('header.php')
                                 <td>" . $row['address'] . "</td>
                                 <td>" . $row['bor_name'] . "</td>
                                 <td>" . $row['beds'] . "</td>
+                                <td>" . $row['rating'] . "</td>
                                 <td><a href='direction_map.php?lat=" . urlencode($row['lat']) . "&lng=" . urlencode($row['lng']) . "'><button>Directions</button></a></td>
                                 <td><a href='info_page.php?name=" . urlencode($row['name']) . "'target= _blank><button>More Info</button></a></td>
                             </tr>";

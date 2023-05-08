@@ -46,7 +46,7 @@ $query3 = "SELECT DISTINCT name, address, zip, phone, beds, lat, lng, rating, b.
             h.name = p.hospital_name
         INNER JOIN services s ON
             p.ser_name = s.ser_name
-        WHERE h.name = '$name'";
+        WHERE h.name LIKE '%$name%'";
 
 $result1 = mysqli_query($conn, $query1);
 $result2 = mysqli_query($conn, $query2);
